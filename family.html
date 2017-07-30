@@ -1,5 +1,5 @@
 <!--/**
-* 亲属关系计算器 js写的
+* 家族亲属关系计算器 js写的
 *
 * @author freekoy 一键攻城狮 <1257678024@qq.com> // 作者邮箱
 * @link https://github.com/freekoy// 作者的关系连接
@@ -15,32 +15,40 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+<link rel="stylesheet" href="./bootstrap.min.css">
+<script type="text/javascript" src="./bootstrap.min.js"></script>
 <style media="screen">
   div {
     margin: 20px;
   }
 </style>
 <body>
+  <div class="container">
+    <header>
+      <h1>家族亲属关系称呼计算器</h1>
+    </header>
+    <div>
+      <input type="text" name="" value="">
+      <button type="button" class="btn btn-primary" onclick="out();">称呼</button>
+      <button type="button" class="btn btn-danger" onclick="zero();">清空</button>
+    </div>
+
   <div>
-    <input type="text" name="" value="">
-    <button type="button" onclick="out();">称呼</button>
-    <button type="button" onclick="zero();">清空</button>
+    <button type="button" class="btn btn-info" onclick="whatname('父');">父</button>
+    <button type="button" class="btn btn-info" onclick="whatname('母');">母</button>
+    <button type="button" class="btn btn-info" onclick="whatname('夫');">夫</button>
+    <button type="button" class="btn btn-info" onclick="whatname('妻');">妻</button>
+    <button type="button" class="btn btn-info" onclick="whatname('兄');">兄</button>
+    <button type="button" class="btn btn-info" onclick="whatname('弟');">弟</button>
+    <button type="button" class="btn btn-info" onclick="whatname('姐');">姐</button>
+    <button type="button" class="btn btn-info" onclick="whatname('妹');">妹</button>
+    <button type="button" class="btn btn-info" onclick="whatname('子');">子</button>
+    <button type="button" class="btn btn-info" onclick="whatname('女');">女</button>
   </div>
 
-<div>
-  <button type="button" onclick="whatname('父');">父</button>
-  <button type="button" onclick="whatname('母');">母</button>
-  <button type="button" onclick="whatname('夫');">夫</button>
-  <button type="button" onclick="whatname('妻');">妻</button>
-  <button type="button" onclick="whatname('兄');">兄</button>
-  <button type="button" onclick="whatname('弟');">弟</button>
-  <button type="button" onclick="whatname('姐');">姐</button>
-  <button type="button" onclick="whatname('妹');">妹</button>
-  <button type="button" onclick="whatname('子');">子</button>
-  <button type="button" onclick="whatname('女');">女</button>
-</div>
-
-<div><input type="text" name="" value=""></div>
+  <div><input type="text" name="" value=""></div>
+  <div>说明:例如老婆的妹妹怎么称呼,就点"妻","妹",再点称呼就出来了</div>
+  </div>
 </body>
 <script type="text/javascript">
   var family = {
