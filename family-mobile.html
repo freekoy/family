@@ -1,0 +1,174 @@
+<!--/**
+* 家族亲属关系计算器 js写的
+*
+* @author freekoy 一键攻城狮 <1257678024@qq.com> // 作者邮箱
+* @link https://github.com/freekoy// 作者的关系连接
+* @since 17年7月29 // 版本号或是日期
+* @copyright GPL // 版权 , 开源软件 GPL 协议
+* 手机计算器有个这样的功能,觉得蛮有趣,于是想用js实现下,嗯,我才不会告诉你是什么手机,免得说在卖广告 ):):
+*/-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script type="text/javascript">
+
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+
+   		});
+
+</script>
+<link rel="stylesheet" href="./base.css">
+<style media="screen">
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+  .btn {
+    /*box-sizing: content-box;*/
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #008CBA; /* Blue */
+    border: 2px solid white;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.5rem;
+    cursor: pointer;
+    outline: none;
+    float:left;
+  }
+  .clear {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #f44336;
+    border: 2px solid white;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.5rem;
+    cursor: pointer;
+    outline: none;
+    float:left;
+  }
+  .say {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #FF9933;
+    border-radius: 100%;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.5rem;
+    cursor: pointer;
+    box-sizing: content-box;
+    position: relative;
+    left: 3.5rem;
+    outline: none;/*去按压时的边框线*/
+    -webkitappearance:none;/*去阴影*/
+    -webkit-tap-highlight-color:rgba(255,255,255,0);
+  }
+  .display {
+    width: 9.7rem;
+    height: 1rem;
+    border: 1px solid black;
+    font-size: 0.7rem;
+  }
+</style>
+<body>
+  <div class="container">
+    <header>
+      <h2 style="text-align:center;">家族亲属关系称呼计算器</h2>
+    </header>
+    <div>
+      <div class="display"></div>
+    </div>
+
+  <div>
+    <button type="button" class="btn" onclick="whatname('父');">父</button>
+    <button type="button" class="btn" onclick="whatname('母');">母</button>
+    <button type="button" class="btn" onclick="back();">回退</button>
+    <button type="button" class="clear" onclick="clearDisplay();">清空</button>
+    <button type="button" class="btn" onclick="whatname('夫');">夫</button>
+    <button type="button" class="btn" onclick="whatname('妻');">妻</button>
+    <button type="button" class="btn" onclick="whatname('兄');">兄</button>
+    <button type="button" class="btn" onclick="whatname('弟');">弟</button>
+    <button type="button" class="btn" onclick="whatname('姐');">姐</button>
+    <button type="button" class="btn" onclick="whatname('妹');">妹</button>
+    <button type="button" class="btn" onclick="whatname('子');">子</button>
+    <button type="button" class="btn" onclick="whatname('女');">女</button>
+  </div>
+  <button type="button" class="say" onclick="out();">称呼</button>
+  <p>说明:例如老婆的妹妹怎么称呼,就点"妻","妹",再点称呼就出来了</p>
+  </div>
+</body>
+<script type="text/javascript">
+  var family = {
+  父父:"爷爷",父母:"奶奶",父妻:"妈妈",父夫:"爸爸",父兄:"伯父",父弟:"叔叔",母夫:"爸爸",
+  父子:"兄弟",父女:"姐妹",父姐:"姑母",父妹:"姑姐",
+  父兄妻:"伯母",父弟妻:"婶婶",父姐夫:"姑丈",父妹夫:"姑丈",
+  母兄:"大舅",母弟:"小舅",母姐:"大姨",母妹:"小姨",
+  母兄妻:"大舅妈",母弟妻:"小舅妈",母姐夫:"大姨夫",母妹夫:"小姨夫",
+  父兄子:"堂兄弟",父弟子:"堂兄弟",父姐子:"表兄弟",父妹子:"表兄弟",
+  母兄子:"表兄弟",母弟子:"表兄弟",母姐子:"表兄弟",母妹子:"表兄弟",
+  父兄女:"堂姐妹",父弟女:"堂姐妹",父姐女:"表姐妹",父妹女:"表姐妹",
+  母兄女:"表姐妹",母弟女:"表姐妹",母姐女:"表姐妹",母妹女:"表姐妹",
+  夫兄:"大伯子",夫弟:"小叔子",夫姐:"大姑子",夫妹:"小姑子",
+  妻兄:"大舅哥",妻弟:"小舅子",妻姐:"大姨子",妻妹:"小姨子",兄妻:"大嫂",弟妻:"弟妹",
+  夫兄子:"侄子",夫弟子:"侄子",夫姐子:"姨甥",夫妹子:"姨甥",
+  夫兄女:"侄女",夫弟女:"侄女",夫姐女:"姨甥女",夫妹女:"姨甥女",
+  兄女:"侄女",弟女:"侄女",姐女:"外甥女",妹女:"外甥女",
+  兄子:"侄子",弟子:"侄子",姐子:"外甥",妹子:"外甥",
+  妻兄子:"内侄",妻弟子:"内侄",妻姐子:"外甥",妻妹子:"外甥",
+  妻兄女:"内侄女",妻弟女:"内侄女",妻姐女:"外甥女",妻妹女:"外甥女",
+};//亲属关系对应
+  var display = document.getElementsByClassName('display')[0];
+  function whatname(name) {
+    display.innerHTML += name;
+  }
+  function out() {
+    if(display.innerHTML.length == 1) {
+      display.innerHTML = display.innerHTML;
+    }else if(family[display.innerHTML]) {
+      display.innerHTML = family[display.innerHTML];
+    }else {
+      display.innerHTML = "亲,关系太复杂了,不会算";
+    }
+  }
+  function clearDisplay() {
+    display.innerHTML = "";//清空
+  }
+  function back() {
+    display.innerHTML = display.innerHTML.substr(0,display.innerHTML.length-1);
+  }
+</script>
+<script type="text/javascript">
+(function(win,doc){
+
+    var fresh = function() {
+        var html = doc.documentElement;
+        var w = html.clientWidth;
+        html.style.fontSize = (w/10) + 'px';
+    }
+
+    if(document.readyState === "complete") {
+        fresh();
+    } else {
+        document.addEventListener( "DOMContentLoaded", fresh, false );
+    }
+
+    win.addEventListener('resize' , fresh , false);
+
+})(window,document)
+//console.log(ele.style.fontSize);
+</script>
+</html>
