@@ -25,7 +25,7 @@
 </script>
 <link rel="stylesheet" href="./base.css">
 <style media="screen">
-  .container {
+    .container {
     width: 100%;
     height: 100%;
   }
@@ -33,30 +33,28 @@
     /*box-sizing: content-box;*/
     width: 2.5rem;
     height: 2.5rem;
-    background-color: #008CBA; /* Blue */
+    background-color: #0099FF; /* Blue */
+    border: 2px solid white;
+    font-size: 0.5rem;
+    outline: none;
+    float:left;
+    color: white;
+  }
+  .btn:active {
+    background: #009999;
+  }
+   .clear {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #FF3333;
     border: 2px solid white;
     color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 0.5rem;
-    cursor: pointer;
     outline: none;
     float:left;
   }
-  .clear {
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: #f44336;
-    border: 2px solid white;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.5rem;
-    cursor: pointer;
-    outline: none;
-    float:left;
+  .clear:active {
+    background: #FF0000;
   }
   .say {
     width: 2.5rem;
@@ -65,17 +63,16 @@
     border-radius: 100%;
     border: none;
     color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 0.5rem;
-    cursor: pointer;
     box-sizing: content-box;
     position: relative;
     left: 3.5rem;
     outline: none;/*去按压时的边框线*/
     -webkitappearance:none;/*去阴影*/
     -webkit-tap-highlight-color:rgba(255,255,255,0);
+  }
+  .say:active {
+    background: #FF6633;
   }
   .display {
     width: 9.7rem;
